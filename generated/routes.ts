@@ -18,6 +18,10 @@ export function RegisterRoutes(app: any) {
   app.get('/v1/prices/',
     function(request: any, response: any, next: any) {
       const args = {
+        search: { "in": "query", "name": "search", "required": true, "typeName": "string" },
+        sort: { "in": "query", "name": "sort", "required": true, "typeName": "string" },
+        limit: { "in": "query", "name": "limit", "required": true, "typeName": "double" },
+        offset: { "in": "query", "name": "offset", "required": true, "typeName": "double" },
       };
 
       let validatedArgs: any[] = [];
@@ -64,6 +68,7 @@ export function RegisterRoutes(app: any) {
     function(request: any, response: any, next: any) {
       const args = {
         id: { "in": "path", "name": "id", "required": true, "typeName": "string" },
+        product: { "in": "body", "name": "product", "required": true, "typeName": "Product" },
       };
 
       let validatedArgs: any[] = [];
@@ -86,6 +91,7 @@ export function RegisterRoutes(app: any) {
   app.post('/v1/prices/',
     function(request: any, response: any, next: any) {
       const args = {
+        product: { "in": "body", "name": "product", "required": true, "typeName": "Product" },
       };
 
       let validatedArgs: any[] = [];

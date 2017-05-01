@@ -2,6 +2,7 @@ import {Get, Post, Put, Delete, Route, Body, Query, Header, Path, SuccessRespons
 
 import  { Product } from "../../shared/interfaces";
 import config from "../../config";
+import schema from "./schema";
 
 @Route("v1/prices")
 export class ProductsController {
@@ -19,8 +20,12 @@ export class ProductsController {
    * @return {Promise<Product[]>} list of the products
    */
   @Get("")
-  public async list(): Promise<Product[]> {
-    return [];
+  public async list(@Query("search") search: string = null,
+                    @Query("sort") sort: string = "_created",
+                    @Query("limit") limit: number = 10,
+                    @Query("offset") offset: number = 0,
+  ): Promise<Product[]> {
+    return schema.find({}).sort(sort).skip(offset).limit(limit).exec();
   }
 
   /**
@@ -29,7 +34,7 @@ export class ProductsController {
    */
   @Get("{id}")
   public async get(@Path("id") id: string): Promise<Product> {
-    return { _id: "", name: "", price: 0 };
+    return schema.findById(id).exec();
   }
 
   /**
@@ -37,8 +42,8 @@ export class ProductsController {
    * @return {Promise<Product>} product detail
    */
   @Put("{id}")
-  public async update(@Path("id") id: string): Promise<Product> {
-    return { _id: "", name: "", price: 0 };
+  public async update(@Path("id") id: string, @Body() product: Product): Promise<Product> {
+    return schema.findByIdAndUpdate(id, product).exec();
   }
 
   /**
@@ -46,8 +51,8 @@ export class ProductsController {
    * @return {Promise<Product>} product detail
    */
   @Post("")
-  public async create(): Promise<Product> {
-    return { _id: "", name: "", price: 0 };
+  public async create(@Body() product: Product): Promise<Product> {
+    return new schema(product).save();
   }
 
   /**
@@ -56,7 +61,7 @@ export class ProductsController {
    */
   @Delete("{id}")
   public async delete(@Path("id") id: string): Promise<void> {
-    return;
+    return schema.findByIdAndRemove(id).exec();
   }
 
 }

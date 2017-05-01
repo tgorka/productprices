@@ -60,7 +60,38 @@
 					}
 				},
 				"description": "Get list of the entities",
-				"parameters": []
+				"parameters": [
+					{
+						"description": "",
+						"in": "query",
+						"name": "search",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "sort",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					}
+				]
 			},
 			"post": {
 				"operationId": "ProductsCreate",
@@ -76,7 +107,17 @@
 					}
 				},
 				"description": "Create new entity",
-				"parameters": []
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "product",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Product"
+						}
+					}
+				]
 			}
 		},
 		"/v1/prices/{id}": {
@@ -125,6 +166,15 @@
 						"name": "id",
 						"required": true,
 						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "product",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Product"
+						}
 					}
 				]
 			},
