@@ -10,10 +10,11 @@
     "clean": "node ./node_modules/.bin/gulp clean",
     "ng": "ng",
     "ui": "ng serve",
-    "build": "ng build",
+    "build": "ng build --env=prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --env=prod"
   },
   "engines": {
     "node": ">=7"

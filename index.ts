@@ -16,6 +16,7 @@ import config from "./config";
 import {RegisterRoutes} from "./generated/routes";
 
 const swaggerDocument = require("./generated/swagger.json");
+const staticFilesDir = __dirname + "/dist";
 
 // controllers need to be referenced in order to get crawled by the generator
 import "./server/products";
@@ -76,8 +77,8 @@ export class Server {
    */
   public middleware(): void {
     this.app.use(helmet());
-    this.app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 50000}));
-    this.app.use(bodyParser.json({limit: '50mb'}));
+    this.app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}));
+    this.app.use(bodyParser.json({limit: "50mb"}));
     this.app.use(morgan("tiny"));
     this.apiRouter.use(cors());
   }
@@ -91,9 +92,12 @@ export class Server {
     this.app.get("/swagger", (req: express.Request, res: express.Response) => {
       res.sendFile(path.join(__dirname + "/generated/swagger.json"));
     });
-    this.app.use("/", jwt({secret: config.jwt.secret}), /*this.permissions.check("vls:client"),*/ this.apiRouter);
+    this.app.use("/api", /*jwt({secret: config.jwt.secret}), this.permissions.check("vls:client"),*/ this.apiRouter);
     // register generated routes
     RegisterRoutes(this.apiRouter);
+    // static files
+    this.app.use("/", express.static(staticFilesDir));
+
   }
 
   /**

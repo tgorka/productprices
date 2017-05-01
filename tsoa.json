@@ -2,7 +2,7 @@
     "swagger": {
         "outputDirectory": "./generated",
         "entryFile": "./index.ts",
-        "basePath": "/"
+        "basePath": "/api"
     },
     "routes": {
         "basePath": "/",
