@@ -1,0 +1,159 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"Product": {
+			"description": "",
+			"properties": {
+				"_id": {
+					"type": "string",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"info": {
+					"type": "string",
+					"description": ""
+				},
+				"price": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"required": [
+				"_id",
+				"name",
+				"price"
+			],
+			"type": "object"
+		}
+	},
+	"info": {
+		"description": "Present prices of the products",
+		"license": {
+			"name": "MIT"
+		},
+		"title": "productprices",
+		"version": "1.0.0"
+	},
+	"paths": {
+		"/v1/prices/": {
+			"get": {
+				"operationId": "ProductsList",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Product"
+							}
+						}
+					}
+				},
+				"description": "Get list of the entities",
+				"parameters": []
+			},
+			"post": {
+				"operationId": "ProductsCreate",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Product"
+						}
+					}
+				},
+				"description": "Create new entity",
+				"parameters": []
+			}
+		},
+		"/v1/prices/{id}": {
+			"get": {
+				"operationId": "ProductsGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Product"
+						}
+					}
+				},
+				"description": "Get entry details",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"put": {
+				"operationId": "ProductsUpdate",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Product"
+						}
+					}
+				},
+				"description": "Update entry details",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"delete": {
+				"operationId": "ProductsDelete",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Delete entry",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {}
+}

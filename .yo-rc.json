@@ -1,0 +1,20 @@
+{
+  "generator-jsberry": {
+    "promptValues": {
+      "name": "productprices",
+      "description": "Present prices of the products",
+      "version": "1.0.0",
+      "authorName": "Tomasz Gorka",
+      "authorEmail": "tomasz[at]gorka.org.pl"
+    },
+    "properties": {
+      "name": "productprices",
+      "description": "Present prices of the products",
+      "version": "1.0.0",
+      "authorName": "Tomasz Gorka",
+      "authorEmail": "tomasz[at]gorka.org.pl",
+      "author": "tomasz gorka <tomasz[at]gorka.org.pl>"
+    },
+    "version": "1.0.0"
+  }
+}

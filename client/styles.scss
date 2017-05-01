@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+@import '~ng2-md-datatable/datatable-theme';
+
+@include mat-core();
+
+$primary: mat-palette($mat-brown, 600, 400, 800);
+$accent:  mat-palette($mat-amber, 500, 300, 700);
+$warn:    mat-palette($mat-red, 500, 300, 900);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+@include mat-datatable-theme($theme);
