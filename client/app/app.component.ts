@@ -57,6 +57,22 @@ export class AppComponent {
     console.log('new')
   }
 
+  public editValue(row): void {
+    console.log('edit', row)
+  }
+
+  public saveValue(row): void {
+    console.log('save', row)
+  }
+
+  public removeValue(row): void {
+    this.loadingIndicator = true;
+    row.one(row._id).remove().subscribe(removedProduct => {
+      this.fetchData();
+      this.loadingIndicator = false;
+    });
+  }
+
   private fetchData(): void {
     this.loadingIndicator = true;
     this.appService.getData(this.page, this.sorts, this.search).subscribe(pagedData => {

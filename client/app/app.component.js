@@ -52,6 +52,20 @@ var AppComponent = (function () {
     AppComponent.prototype.newValue = function () {
         console.log('new');
     };
+    AppComponent.prototype.editValue = function (row) {
+        console.log('edit', row);
+    };
+    AppComponent.prototype.saveValue = function (row) {
+        console.log('save', row);
+    };
+    AppComponent.prototype.removeValue = function (row) {
+        var _this = this;
+        this.loadingIndicator = true;
+        row.one(row._id).remove().subscribe(function (removedProduct) {
+            _this.fetchData();
+            _this.loadingIndicator = false;
+        });
+    };
     AppComponent.prototype.fetchData = function () {
         var _this = this;
         this.loadingIndicator = true;

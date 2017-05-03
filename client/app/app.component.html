@@ -86,6 +86,14 @@
       </ng-template>
     </ngx-datatable-column>
 
+    <ngx-datatable-column name="Action">
+      <ng-template ngx-datatable-cell-template let-row="row">
+        <button (click)="saveValue(row)">Save</button>
+        <button (click)="editValue(row)">Edit</button>
+        <button (click)="removeValue(row)">Delete</button>
+      </ng-template>
+    </ngx-datatable-column>
+
   </ngx-datatable>
 
 </content>
