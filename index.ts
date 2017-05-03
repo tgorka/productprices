@@ -20,6 +20,7 @@ const staticFilesDir = __dirname + "/dist";
 
 // controllers need to be referenced in order to get crawled by the generator
 import "./server/products";
+import "./server/prices";
 
 /**
  * The server main class
@@ -138,8 +139,8 @@ export class Server {
    * Listen app trigger os selected configuration.
    */
   public listen(): void {
-    this.app.listen(config.server.port, () => {
-      console.log(`Magic happens on port ${config.server.port}`);
+    this.app.listen(config.server.port, config.server.host, () => {
+      console.log(`Magic happens on ${config.server.host}:${config.server.port}`);
     });
   }
 }

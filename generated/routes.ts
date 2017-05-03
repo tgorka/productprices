@@ -2,6 +2,7 @@
 import { ValidateParam } from 'tsoa';
 import { Controller } from 'tsoa';
 import { ProductsController } from './../server/products/index';
+import { PricesController } from './../server/prices/index';
 
 const models: any = {
   "Product": {
@@ -15,7 +16,7 @@ const models: any = {
 };
 
 export function RegisterRoutes(app: any) {
-  app.get('/v1/prices/',
+  app.get('/v1/products/',
     function(request: any, response: any, next: any) {
       const args = {
         search: { "in": "query", "name": "search", "required": true, "typeName": "string" },
@@ -41,7 +42,7 @@ export function RegisterRoutes(app: any) {
       }
       promiseHandler(promise, statusCode, response, next);
     });
-  app.get('/v1/prices/:id',
+  app.get('/v1/products/:id',
     function(request: any, response: any, next: any) {
       const args = {
         id: { "in": "path", "name": "id", "required": true, "typeName": "string" },
@@ -64,7 +65,7 @@ export function RegisterRoutes(app: any) {
       }
       promiseHandler(promise, statusCode, response, next);
     });
-  app.put('/v1/prices/:id',
+  app.put('/v1/products/:id',
     function(request: any, response: any, next: any) {
       const args = {
         id: { "in": "path", "name": "id", "required": true, "typeName": "string" },
@@ -88,7 +89,7 @@ export function RegisterRoutes(app: any) {
       }
       promiseHandler(promise, statusCode, response, next);
     });
-  app.post('/v1/prices/',
+  app.post('/v1/products/',
     function(request: any, response: any, next: any) {
       const args = {
         product: { "in": "body", "name": "product", "required": true, "typeName": "Product" },
@@ -111,7 +112,7 @@ export function RegisterRoutes(app: any) {
       }
       promiseHandler(promise, statusCode, response, next);
     });
-  app.delete('/v1/prices/:id',
+  app.delete('/v1/products/:id',
     function(request: any, response: any, next: any) {
       const args = {
         id: { "in": "path", "name": "id", "required": true, "typeName": "string" },
@@ -128,6 +129,28 @@ export function RegisterRoutes(app: any) {
 
 
       const promise = controller.delete.apply(controller, validatedArgs);
+      let statusCode = undefined;
+      if (controller instanceof Controller) {
+        statusCode = (controller as Controller).getStatus();
+      }
+      promiseHandler(promise, statusCode, response, next);
+    });
+  app.get('/v1/prices/',
+    function(request: any, response: any, next: any) {
+      const args = {
+      };
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request);
+      } catch (err) {
+        return next(err);
+      }
+
+      const controller = new PricesController();
+
+
+      const promise = controller.parseUrl.apply(controller, validatedArgs);
       let statusCode = undefined;
       if (controller instanceof Controller) {
         statusCode = (controller as Controller).getStatus();

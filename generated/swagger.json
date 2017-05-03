@@ -42,7 +42,7 @@
 		"version": "1.0.0"
 	},
 	"paths": {
-		"/v1/prices/": {
+		"/v1/products/": {
 			"get": {
 				"operationId": "ProductsList",
 				"produces": [
@@ -120,7 +120,7 @@
 				]
 			}
 		},
-		"/v1/prices/{id}": {
+		"/v1/products/{id}": {
 			"get": {
 				"operationId": "ProductsGet",
 				"produces": [
@@ -198,6 +198,21 @@
 						"type": "string"
 					}
 				]
+			}
+		},
+		"/v1/prices/": {
+			"get": {
+				"operationId": "PricesParseUrl",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Parse all embedded url for the prices",
+				"parameters": []
 			}
 		}
 	},

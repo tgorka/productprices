@@ -4,16 +4,8 @@ import  { Product } from "../../shared/interfaces";
 import config from "../../config";
 import schema from "./schema";
 
-@Route("v1/prices")
+@Route("v1/products")
 export class ProductsController {
-
-  /**
-   * Controller constructor.
-   *
-   * @constructor
-   */
-  constructor() {
-  }
 
   /**
    * Get list of the entities
