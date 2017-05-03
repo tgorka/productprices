@@ -33,7 +33,6 @@ export class AppComponent {
   }
 
   public onSort(event): void {
-    console.log('er', event)
     this.sorts = event.sorts;
     this.fetchData();
   }

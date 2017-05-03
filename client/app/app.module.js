@@ -18,6 +18,7 @@ var ng2_md_datatable_1 = require("ng2-md-datatable");
 var ngx_datatable_1 = require("@swimlane/ngx-datatable");
 var app_component_1 = require("./app.component");
 var app_service_1 = require("./app.service");
+var rest_service_1 = require("./rest.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,6 +38,7 @@ AppModule = __decorate([
             material_1.MaterialModule,
             ngx_datatable_1.NgxDatatableModule,
             ng2_md_datatable_1.MdDataTableModule,
+            rest_service_1.APIModule
         ],
         providers: [
             { provide: app_service_1.AppService, useClass: app_service_1.AppService },

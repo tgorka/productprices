@@ -31,7 +31,6 @@ var AppComponent = (function () {
         this.fetchData();
     };
     AppComponent.prototype.onSort = function (event) {
-        console.log('er', event);
         this.sorts = event.sorts;
         this.fetchData();
     };

@@ -13,6 +13,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from "./app.component";
 import { AppService } from "./app.service";
+import { APIModule } from "./rest.service";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AppService } from "./app.service";
     MaterialModule,
     NgxDatatableModule,
     MdDataTableModule,
+    APIModule
   ],
   providers: [
     { provide: AppService, useClass: AppService },
