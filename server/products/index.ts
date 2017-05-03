@@ -52,6 +52,7 @@ export class ProductsController {
    */
   @Put("{id}")
   public async update(@Path("id") id: string, @Body() product: Product): Promise<Product> {
+    product._id = id;
     return schema.findByIdAndUpdate(id, product).exec();
   }
 
@@ -62,6 +63,7 @@ export class ProductsController {
    */
   @Post("")
   public async create(@Body() product: Product): Promise<Product> {
+    product._id = undefined;
     return new schema(product).save();
   }
 

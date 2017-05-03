@@ -32,7 +32,14 @@ export class AppService {
   }
 
   public updateData(product: Product): Observable<Product> {
-    return Observable.of(product);
+    let id = product._id;
+    product._id = undefined;
+    return Observable.of(this.api.all("products").one(id).customPUT(product));
+  }
+
+  public createData(product: Product): Observable<Product> {
+    product._id = undefined;
+    return Observable.of(this.api.all("products").customPOST(product));
   }
 
   private getPagedProducts(data: any, page: Page, sorts: Sort[], search: string, count: number): PagedProducts {

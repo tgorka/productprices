@@ -46,16 +46,12 @@
 
     <ngx-datatable-column name="Name">
       <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-        <span
-          title="Double click to edit"
-          (dblclick)="editing[row.$$index + '-name'] = true"
-          *ngIf="!editing[row.$$index + '-name']">
-          {{value}}
-        </span>
+        <span *ngIf="row._id && !editing[row._id]">{{value}}</span>
         <input
           autofocus
+          (keyup)="editing[row._id].name = $event.target.value"
           (blur)="updateValue($event, 'name', value, row)"
-          *ngIf="editing[row.$$index + '-name']"
+          *ngIf="!row._id || editing[row._id]"
           type="text"
           [value]="value"
         />
@@ -64,33 +60,38 @@
 
     <ngx-datatable-column name="Info">
       <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-         <span
-           title="Double click to edit"
-           (dblclick)="editing[row.$$index + '-gender'] = true"
-           *ngIf="!editing[row.$$index + '-gender']">
-          {{value}}
-        </span>
-        <select
-          *ngIf="editing[row.$$index + '-gender']"
-          (change)="updateValue($event, 'gender', value, row)"
-          [value]="value">
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+        <span *ngIf="row._id && !editing[row._id]">{{value}}</span>
+        <input
+          autofocus
+          (keyup)="editing[row._id].info = $event.target.value"
+          (blur)="updateValue($event, 'name', value, row)"
+          *ngIf="!row._id || editing[row._id]"
+          type="text"
+          [value]="value"
+        />
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Price">
       <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
-        {{value}}
+        <span *ngIf="row._id && !editing[row._id]">{{value}}</span>
+        <input
+          autofocus
+          (keyup)="editing[row._id].price = $event.target.value"
+          (blur)="updateValue($event, 'name', value, row)"
+          *ngIf="!row._id || editing[row._id]"
+          type="text"
+          [value]="value"
+        />
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Action">
       <ng-template ngx-datatable-cell-template let-row="row">
-        <button (click)="saveValue(row)">Save</button>
-        <button (click)="editValue(row)">Edit</button>
-        <button (click)="removeValue(row)">Delete</button>
+        <button *ngIf="this.editing[row._id]" (click)="saveValue(row)">Save</button>
+        <button *ngIf="this.editing[row._id]" (click)="this.editing[row._id] = undefined">Cancel</button>
+        <button *ngIf="!this.editing[row._id]" (click)="this.editing[row._id] = {_id: row._id}">Edit</button>
+        <button *ngIf="!this.editing[row._id]" (click)="removeValue(row)">Delete</button>
       </ng-template>
     </ngx-datatable-column>
 

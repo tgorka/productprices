@@ -34,16 +34,11 @@
 					"description": ""
 				},
 				"price": {
-					"type": "number",
-					"format": "double",
+					"type": "string",
 					"description": ""
 				}
 			},
-			"required": [
-				"_id",
-				"name",
-				"price"
-			],
+			"required": [],
 			"type": "object"
 		}
 	},

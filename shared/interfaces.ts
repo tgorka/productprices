@@ -1,8 +1,8 @@
 export interface Product {
-  _id: string;
+  _id?: string;
   name: string;
-  info?: string;
-  price: number;
+  info: string;
+  price: string;
 }
 
 export interface Count {

@@ -39,24 +39,35 @@ var AppComponent = (function () {
         this.fetchData();
     };
     AppComponent.prototype.updateValue = function (event, cell, cellValue, row) {
-        var _this = this;
-        console.log('edit', event, cell, cellValue, row);
+        /*console.log('edit', event, cell, cellValue, row)
         this.loadingIndicator = true;
         this.editing[row.$$index + '-' + cell] = false;
         this.products[row.$$index][cell] = event.target.value;
-        this.appService.updateData(this.products[row.$$index]).subscribe(function (updatedProduct) {
-            _this.products[row.$$index] = updatedProduct;
-            _this.loadingIndicator = false;
-        });
+        this.appService.updateData(this.products[row.$$index]).subscribe(updatedProduct => {
+          this.products[row.$$index] = updatedProduct;
+          this.loadingIndicator = false;
+        })*/
     };
     AppComponent.prototype.newValue = function () {
         console.log('new');
-    };
-    AppComponent.prototype.editValue = function (row) {
-        console.log('edit', row);
+        this.products.push({ _id: "", name: "", info: "", price: "" });
+        this.editing[""] = { _id: "" };
+        /*this.loadingIndicator = true;
+        this.appService.createData(this.editing[""]).subscribe(updatedProduct => {
+          this.editing[""] = undefined;
+          this.fetchData();
+          this.loadingIndicator = false;
+        });*/
     };
     AppComponent.prototype.saveValue = function (row) {
-        console.log('save', row);
+        var _this = this;
+        this.loadingIndicator = true;
+        var newValue = Object.assign({ name: row.name, price: row.price, info: row.price }, this.editing[row._id]);
+        this.appService.updateData(newValue).subscribe(function (updatedProduct) {
+            _this.products[row.$$index] = updatedProduct;
+            _this.editing[row._id] = undefined;
+            _this.loadingIndicator = false;
+        });
     };
     AppComponent.prototype.removeValue = function (row) {
         var _this = this;

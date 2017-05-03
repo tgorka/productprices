@@ -35,7 +35,13 @@ var AppService = (function () {
         ])).map(function (data) { return _this.getPagedProducts(data[0], page, sorts, search, data[1].count); });
     };
     AppService.prototype.updateData = function (product) {
-        return Observable_1.Observable.of(product);
+        var id = product._id;
+        product._id = undefined;
+        return Observable_1.Observable.of(this.api.all("products").one(id).customPUT(product));
+    };
+    AppService.prototype.createData = function (product) {
+        product._id = undefined;
+        return Observable_1.Observable.of(this.api.all("products").customPOST(product));
     };
     AppService.prototype.getPagedProducts = function (data, page, sorts, search, count) {
         page.totalElements = count;

@@ -12,10 +12,10 @@ const models: any = {
   },
   "Product": {
     properties: {
-      "_id": { "required": true, "typeName": "string" },
-      "name": { "required": true, "typeName": "string" },
+      "_id": { "required": false, "typeName": "string" },
+      "name": { "required": false, "typeName": "string" },
       "info": { "required": false, "typeName": "string" },
-      "price": { "required": true, "typeName": "double" },
+      "price": { "required": false, "typeName": "string" },
     },
   },
 };

@@ -43,26 +43,36 @@ export class AppComponent {
   }
 
   public updateValue(event, cell, cellValue, row): void {
-    console.log('edit', event, cell, cellValue, row)
+    /*console.log('edit', event, cell, cellValue, row)
     this.loadingIndicator = true;
     this.editing[row.$$index + '-' + cell] = false;
     this.products[row.$$index][cell] = event.target.value;
     this.appService.updateData(this.products[row.$$index]).subscribe(updatedProduct => {
       this.products[row.$$index] = updatedProduct;
       this.loadingIndicator = false;
-    })
+    })*/
   }
 
   public newValue(): void {
     console.log('new')
-  }
-
-  public editValue(row): void {
-    console.log('edit', row)
+    this.products.push({ _id: "", name: "", info: "", price: "" });
+    this.editing[""] = { _id: "" };
+    /*this.loadingIndicator = true;
+    this.appService.createData(this.editing[""]).subscribe(updatedProduct => {
+      this.editing[""] = undefined;
+      this.fetchData();
+      this.loadingIndicator = false;
+    });*/
   }
 
   public saveValue(row): void {
-    console.log('save', row)
+    this.loadingIndicator = true;
+    let newValue = Object.assign({ name: row.name, price: row.price, info: row.price }, this.editing[row._id]);
+    this.appService.updateData(newValue).subscribe(updatedProduct => {
+      this.products[row.$$index] = updatedProduct;
+      this.editing[row._id] = undefined;
+      this.loadingIndicator = false;
+    });
   }
 
   public removeValue(row): void {
