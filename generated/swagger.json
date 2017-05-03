@@ -4,6 +4,20 @@
 		"application/json"
 	],
 	"definitions": {
+		"Count": {
+			"description": "",
+			"properties": {
+				"count": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"required": [
+				"count"
+			],
+			"type": "object"
+		},
 		"Product": {
 			"description": "",
 			"properties": {
@@ -42,6 +56,32 @@
 		"version": "1.0.0"
 	},
 	"paths": {
+		"/v1/products/count": {
+			"get": {
+				"operationId": "ProductsCount",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Count"
+						}
+					}
+				},
+				"description": "Get count of the entities",
+				"parameters": [
+					{
+						"description": "the value for filtering the results",
+						"in": "query",
+						"name": "search",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
 		"/v1/products/": {
 			"get": {
 				"operationId": "ProductsList",
@@ -62,21 +102,21 @@
 				"description": "Get list of the entities",
 				"parameters": [
 					{
-						"description": "",
+						"description": "the value for filtering the results",
 						"in": "query",
 						"name": "search",
 						"required": true,
 						"type": "string"
 					},
 					{
-						"description": "",
+						"description": "the value for ordering the results",
 						"in": "query",
 						"name": "sort",
 						"required": true,
 						"type": "string"
 					},
 					{
-						"description": "",
+						"description": "the values results",
 						"in": "query",
 						"name": "limit",
 						"required": true,
@@ -84,7 +124,7 @@
 						"format": "double"
 					},
 					{
-						"description": "",
+						"description": "for the limit",
 						"in": "query",
 						"name": "offset",
 						"required": true,
@@ -109,7 +149,7 @@
 				"description": "Create new entity",
 				"parameters": [
 					{
-						"description": "",
+						"description": "data to create",
 						"in": "body",
 						"name": "product",
 						"required": true,
@@ -118,6 +158,19 @@
 						}
 					}
 				]
+			},
+			"delete": {
+				"operationId": "ProductsClean",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "Clean all the entries",
+				"parameters": []
 			}
 		},
 		"/v1/products/{id}": {
@@ -137,7 +190,7 @@
 				"description": "Get entry details",
 				"parameters": [
 					{
-						"description": "",
+						"description": "of the entity",
 						"in": "path",
 						"name": "id",
 						"required": true,
@@ -161,14 +214,14 @@
 				"description": "Update entry details",
 				"parameters": [
 					{
-						"description": "",
+						"description": "of the entity",
 						"in": "path",
 						"name": "id",
 						"required": true,
 						"type": "string"
 					},
 					{
-						"description": "",
+						"description": "data to update",
 						"in": "body",
 						"name": "product",
 						"required": true,
@@ -191,7 +244,7 @@
 				"description": "Delete entry",
 				"parameters": [
 					{
-						"description": "",
+						"description": "of the entity",
 						"in": "path",
 						"name": "id",
 						"required": true,

@@ -10,11 +10,13 @@ const productsSchema = new Schema({
   _deactivated: {type: Date, default: null},
 
   // Schema properties
-  name: {type: String, required: true, index: true},
+  name: {type: String, required: true},
   info: {type: String, default: null},
-  price: {type: Number, required: true, index: true},
+  price: {type: String, required: true},
 
 });
+
+productsSchema.index({name: 'text', info: 'text', price: 'text'});
 
 
 export default mongoose.model('products', productsSchema);

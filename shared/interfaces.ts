@@ -4,3 +4,7 @@ export interface Product {
   info?: string;
   price: number;
 }
+
+export interface Count {
+  count: number;
+}

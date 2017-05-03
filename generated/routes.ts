@@ -5,6 +5,11 @@ import { ProductsController } from './../server/products/index';
 import { PricesController } from './../server/prices/index';
 
 const models: any = {
+  "Count": {
+    properties: {
+      "count": { "required": true, "typeName": "double" },
+    },
+  },
   "Product": {
     properties: {
       "_id": { "required": true, "typeName": "string" },
@@ -16,6 +21,29 @@ const models: any = {
 };
 
 export function RegisterRoutes(app: any) {
+  app.get('/v1/products/count',
+    function(request: any, response: any, next: any) {
+      const args = {
+        search: { "in": "query", "name": "search", "required": true, "typeName": "string" },
+      };
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request);
+      } catch (err) {
+        return next(err);
+      }
+
+      const controller = new ProductsController();
+
+
+      const promise = controller.count.apply(controller, validatedArgs);
+      let statusCode = undefined;
+      if (controller instanceof Controller) {
+        statusCode = (controller as Controller).getStatus();
+      }
+      promiseHandler(promise, statusCode, response, next);
+    });
   app.get('/v1/products/',
     function(request: any, response: any, next: any) {
       const args = {
@@ -129,6 +157,28 @@ export function RegisterRoutes(app: any) {
 
 
       const promise = controller.delete.apply(controller, validatedArgs);
+      let statusCode = undefined;
+      if (controller instanceof Controller) {
+        statusCode = (controller as Controller).getStatus();
+      }
+      promiseHandler(promise, statusCode, response, next);
+    });
+  app.delete('/v1/products/',
+    function(request: any, response: any, next: any) {
+      const args = {
+      };
+
+      let validatedArgs: any[] = [];
+      try {
+        validatedArgs = getValidatedArgs(args, request);
+      } catch (err) {
+        return next(err);
+      }
+
+      const controller = new ProductsController();
+
+
+      const promise = controller.clean.apply(controller, validatedArgs);
       let statusCode = undefined;
       if (controller instanceof Controller) {
         statusCode = (controller as Controller).getStatus();

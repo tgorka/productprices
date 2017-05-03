@@ -93,14 +93,13 @@ export class PricesController {
       .then(data => {
         winston.log("info", `Fetched, parsed and sored ${data.length} items.`);
       });
-
   }
 
   public parseSingleElement(json: any, provider: any): any {
     return {
       name: this.parseValue(json, provider.path.name),
       info: this.parseValue(json, provider.path.info),
-      price: parseFloat(this.parseValue(json, provider.path.price)),
+      price: this.parseValue(json, provider.path.price),
     }
   }
 
