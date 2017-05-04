@@ -42,20 +42,9 @@ export class AppComponent {
     this.fetchData();
   }
 
-  public updateValue(event, cell, cellValue, row): void {
-    /*console.log('edit', event, cell, cellValue, row)
-    this.loadingIndicator = true;
-    this.editing[row.$$index + '-' + cell] = false;
-    this.products[row.$$index][cell] = event.target.value;
-    this.appService.updateData(this.products[row.$$index]).subscribe(updatedProduct => {
-      this.products[row.$$index] = updatedProduct;
-      this.loadingIndicator = false;
-    })*/
-  }
-
   public newValue(): void {
     console.log('new')
-    this.products.push({ _id: "", name: "", info: "", price: "" });
+    this.products = [{ _id: "", name: "", info: "", price: "" }, ...this.products];
     this.editing[""] = { _id: "" };
     /*this.loadingIndicator = true;
     this.appService.createData(this.editing[""]).subscribe(updatedProduct => {

@@ -37,7 +37,12 @@ var AppService = (function () {
     AppService.prototype.updateData = function (product) {
         var id = product._id;
         product._id = undefined;
-        return Observable_1.Observable.of(this.api.all("products").one(id).customPUT(product));
+        if (!id) {
+            return Observable_1.Observable.of(this.api.all("products").customPOST(product));
+        }
+        else {
+            return Observable_1.Observable.of(this.api.all("products").one(id).customPUT(product));
+        }
     };
     AppService.prototype.createData = function (product) {
         product._id = undefined;

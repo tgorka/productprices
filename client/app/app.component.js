@@ -38,19 +38,9 @@ var AppComponent = (function () {
         this.search = event.target.value;
         this.fetchData();
     };
-    AppComponent.prototype.updateValue = function (event, cell, cellValue, row) {
-        /*console.log('edit', event, cell, cellValue, row)
-        this.loadingIndicator = true;
-        this.editing[row.$$index + '-' + cell] = false;
-        this.products[row.$$index][cell] = event.target.value;
-        this.appService.updateData(this.products[row.$$index]).subscribe(updatedProduct => {
-          this.products[row.$$index] = updatedProduct;
-          this.loadingIndicator = false;
-        })*/
-    };
     AppComponent.prototype.newValue = function () {
         console.log('new');
-        this.products.push({ _id: "", name: "", info: "", price: "" });
+        this.products = [{ _id: "", name: "", info: "", price: "" }].concat(this.products);
         this.editing[""] = { _id: "" };
         /*this.loadingIndicator = true;
         this.appService.createData(this.editing[""]).subscribe(updatedProduct => {

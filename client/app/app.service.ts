@@ -34,7 +34,11 @@ export class AppService {
   public updateData(product: Product): Observable<Product> {
     let id = product._id;
     product._id = undefined;
-    return Observable.of(this.api.all("products").one(id).customPUT(product));
+    if (!id) {
+      return Observable.of(this.api.all("products").customPOST(product));
+    } else {
+      return Observable.of(this.api.all("products").one(id).customPUT(product));
+    }
   }
 
   public createData(product: Product): Observable<Product> {

@@ -50,7 +50,6 @@
         <input
           autofocus
           (keyup)="editing[row._id].name = $event.target.value"
-          (blur)="updateValue($event, 'name', value, row)"
           *ngIf="!row._id || editing[row._id]"
           type="text"
           [value]="value"
@@ -64,7 +63,6 @@
         <input
           autofocus
           (keyup)="editing[row._id].info = $event.target.value"
-          (blur)="updateValue($event, 'name', value, row)"
           *ngIf="!row._id || editing[row._id]"
           type="text"
           [value]="value"
@@ -78,7 +76,6 @@
         <input
           autofocus
           (keyup)="editing[row._id].price = $event.target.value"
-          (blur)="updateValue($event, 'name', value, row)"
           *ngIf="!row._id || editing[row._id]"
           type="text"
           [value]="value"
