@@ -32,3 +32,6 @@ Then to run server
 The default node scripts will run gulp task to run the server.
 All the configurations are in config.ts - for the server part and in client/environments for the frontend part.
 
+## Server documentation
+
+there is swagger documentation for the REST API on the endpoint `/doc`
