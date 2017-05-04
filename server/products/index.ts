@@ -63,7 +63,7 @@ export class ProductsController {
    */
   @Post("")
   public async create(@Body() product: Product): Promise<Product> {
-    product._id = undefined;
+    delete product._id;
     return new schema(product).save();
   }
 

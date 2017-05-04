@@ -43,15 +43,8 @@ export class AppComponent {
   }
 
   public newValue(): void {
-    console.log('new')
     this.products = [{ _id: "", name: "", info: "", price: "" }, ...this.products];
     this.editing[""] = { _id: "" };
-    /*this.loadingIndicator = true;
-    this.appService.createData(this.editing[""]).subscribe(updatedProduct => {
-      this.editing[""] = undefined;
-      this.fetchData();
-      this.loadingIndicator = false;
-    });*/
   }
 
   public saveValue(row): void {
@@ -59,7 +52,8 @@ export class AppComponent {
     let newValue = Object.assign({ name: row.name, price: row.price, info: row.price }, this.editing[row._id]);
     this.appService.updateData(newValue).subscribe(updatedProduct => {
       this.products[row.$$index] = updatedProduct;
-      this.editing[row._id] = undefined;
+      delete this.editing[row._id];
+      this.fetchData();
       this.loadingIndicator = false;
     });
   }

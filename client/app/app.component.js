@@ -39,15 +39,8 @@ var AppComponent = (function () {
         this.fetchData();
     };
     AppComponent.prototype.newValue = function () {
-        console.log('new');
         this.products = [{ _id: "", name: "", info: "", price: "" }].concat(this.products);
         this.editing[""] = { _id: "" };
-        /*this.loadingIndicator = true;
-        this.appService.createData(this.editing[""]).subscribe(updatedProduct => {
-          this.editing[""] = undefined;
-          this.fetchData();
-          this.loadingIndicator = false;
-        });*/
     };
     AppComponent.prototype.saveValue = function (row) {
         var _this = this;
@@ -55,7 +48,9 @@ var AppComponent = (function () {
         var newValue = Object.assign({ name: row.name, price: row.price, info: row.price }, this.editing[row._id]);
         this.appService.updateData(newValue).subscribe(function (updatedProduct) {
             _this.products[row.$$index] = updatedProduct;
-            _this.editing[row._id] = undefined;
+            delete _this.editing[row._id];
+            console.log('updated/created', row._id, _this.editing);
+            _this.fetchData();
             _this.loadingIndicator = false;
         });
     };
