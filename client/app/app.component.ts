@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { toast } from "angular2-materialize";
 
 import { createPage, createPageInfo, Page, PageInfo, Product, Sort } from "./app.interface";
 import { AppService } from "./app.service";
@@ -55,6 +56,15 @@ export class AppComponent {
       delete this.editing[row._id];
       this.fetchData();
       this.loadingIndicator = false;
+    }, err => {
+      err = (err.data) ? err.data : err;
+      let param = err.errors;
+      if (param) {
+        param = Object.keys(param).map(key => `${key}: ${param[key]}`).join(" ");
+      }
+      let msg = err.message || param || "Error during performing action.";
+      toast(msg, 4000);
+      this.loadingIndicator = false;
     });
   }
 
@@ -62,6 +72,11 @@ export class AppComponent {
     this.loadingIndicator = true;
     row.one(row._id).remove().subscribe(removedProduct => {
       this.fetchData();
+      this.loadingIndicator = false;
+    }, err => {
+      err = (err.data) ? err.data : err;
+      let msg = err.message || "Error during performing action.";
+      toast(msg, 4000);
       this.loadingIndicator = false;
     });
   }
@@ -72,6 +87,11 @@ export class AppComponent {
       this.page = pagedData.page;
       this.products = pagedData.products;
       this.sorts = pagedData.sorts;
+      this.loadingIndicator = false;
+    }, err => {
+      err = (err.data) ? err.data : err;
+      let msg = err.message || "Error during performing action.";
+      toast(msg, 4000);
       this.loadingIndicator = false;
     });
   }

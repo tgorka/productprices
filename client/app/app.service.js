@@ -38,10 +38,10 @@ var AppService = (function () {
         var id = product._id;
         product._id = undefined;
         if (!id) {
-            return Observable_1.Observable.of(this.api.all("products").customPOST(product));
+            return this.api.all("products").customPOST(product);
         }
         else {
-            return Observable_1.Observable.of(this.api.all("products").one(id).customPUT(product));
+            return this.api.all("products").one(id).customPUT(product);
         }
     };
     AppService.prototype.createData = function (product) {

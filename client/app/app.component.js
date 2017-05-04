@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var angular2_materialize_1 = require("angular2-materialize");
 var app_interface_1 = require("./app.interface");
 var app_service_1 = require("./app.service");
 var AppComponent = (function () {
@@ -49,8 +50,16 @@ var AppComponent = (function () {
         this.appService.updateData(newValue).subscribe(function (updatedProduct) {
             _this.products[row.$$index] = updatedProduct;
             delete _this.editing[row._id];
-            console.log('updated/created', row._id, _this.editing);
             _this.fetchData();
+            _this.loadingIndicator = false;
+        }, function (err) {
+            err = (err.data) ? err.data : err;
+            var param = err.errors;
+            if (param) {
+                param = Object.keys(param).map(function (key) { return key + ": " + param[key]; }).join(" ");
+            }
+            var msg = err.message || param || "Error during performing action.";
+            angular2_materialize_1.toast(msg, 4000);
             _this.loadingIndicator = false;
         });
     };
@@ -59,6 +68,11 @@ var AppComponent = (function () {
         this.loadingIndicator = true;
         row.one(row._id).remove().subscribe(function (removedProduct) {
             _this.fetchData();
+            _this.loadingIndicator = false;
+        }, function (err) {
+            err = (err.data) ? err.data : err;
+            var msg = err.message || "Error during performing action.";
+            angular2_materialize_1.toast(msg, 4000);
             _this.loadingIndicator = false;
         });
     };
@@ -69,6 +83,11 @@ var AppComponent = (function () {
             _this.page = pagedData.page;
             _this.products = pagedData.products;
             _this.sorts = pagedData.sorts;
+            _this.loadingIndicator = false;
+        }, function (err) {
+            err = (err.data) ? err.data : err;
+            var msg = err.message || "Error during performing action.";
+            angular2_materialize_1.toast(msg, 4000);
             _this.loadingIndicator = false;
         });
     };
